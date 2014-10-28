@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    form.pure-form.pure-form-stacked.pure-form-aligned(method='POST')
+        fieldset
+            label Name:
+                input(type="text", name="who")
+            label Link:
+                input(type="text", name="link")
+            label Description:
+                input(type="text", name="description")
+            label Date:
+                input(type="date", name="when")
+            button(type='submit').pure-button.pure-button-primary Add
