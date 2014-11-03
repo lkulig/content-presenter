@@ -1,0 +1,20 @@
+var Firebase = require("firebase");
+var firebaseDB = new Firebase('https://luminous-fire-1463.firebaseio.com/');
+
+module.exports = function() {
+
+    var contents = "contents";
+
+    function contentsDB() {
+        return firebaseDB.child(contents);
+    }
+
+    function fetchContents(to_call) {
+        return contentsDB().limit(10).on('child_added', to_call(snapshot));
+    }
+
+    return {
+        contentsDB: contentsDB
+    };
+
+}();

@@ -1,14 +1,34 @@
 extends layout
 
-
 block content
     div.splash-container
         div.splash
-            ul(class='bxslider' style='width:500px')
-                li
-                    img(src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hausziege_04.jpg/256px-Hausziege_04.jpg' title='goooooat')
+            ul.bxslider
+                each item in links
+                    li
+                        div.bx-caption
+                            span.title #{item.title}
+                            span.description #{item.description}
+                            span.link: a(href=item.link, target='_blank') click me
+                            span.author #{item.who} #{item.date}
 
+    a.pure-button.pure-button-primary(id='add', href='#modal-one') Add
 
-    a.pure-button.pure-button-primary(id='add', href='/add') Add
-
-
+    div.modal(id='modal-one', aria-hidden=true)
+            div.modal-dialog
+                    div.modal-header
+                        h2 Podziel się linkiem
+                        a.btn-close(href='#close', aria-hidden=true) x
+                    div.modal-body
+                        form.pure-form.pure-form-stacked.pure-form-aligned(method='POST', action='/add')
+                            fieldset
+                                label Title:
+                                    input(type='text', name='title', required=true)
+                                label Name:
+                                    input(type='text', name='who', required=true)
+                                label Link:
+                                    input(type='text', name='link', required=true)
+                                label Description:
+                                    input(type='text', name='description')
+                            div.modal-footer
+                                button(type='submit').pure-button.pure-button-primary Add

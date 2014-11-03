@@ -4,11 +4,9 @@ block content
     form.pure-form.pure-form-stacked.pure-form-aligned(method='POST')
         fieldset
             label Name:
-                input(type="text", name="who")
+                input(type='text', name='who', required=true)
             label Link:
-                input(type="text", name="link")
+                input(type='text', name='link', required=true)
             label Description:
-                input(type="text", name="description")
-            label Date:
-                input(type="date", name="when")
+                input(type='text', name='description')
             button(type='submit').pure-button.pure-button-primary Add
