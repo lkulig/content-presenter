@@ -4,13 +4,14 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var routes = require('./routes/index');
-var users = require('./routes/users');
-var add = require('./routes/add');
-
+var contents = require('./routes/contents');
 var app = express();
 
+
+var firebaseDB = require('./public/javascripts/FireBaseDBClient');
+
+app.disable('etag');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -23,9 +24,27 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// use db in req
+app.use(function(req,res,next){
+    req.db = firebaseDB;
+    next();
+});
+
+var links = [];
+firebaseDB.contentsDB().limit(10).on('value', function (snapshot) {
+    if (snapshot.val()) {
+        links = snapshot.val();
+    }
+});
+
+app.use(function(req,res,next){
+    req.contents = links;
+    next();
+});
+
+
 app.use('/', routes);
-app.use('/users', users);
-app.use('/add', add);
+app.use('/contents', contents);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -46,7 +65,6 @@ if (app.get('env') === 'development') {
             error: err
         });
     });
-
 }
 
 // production error handler

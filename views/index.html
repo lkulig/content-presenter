@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app="contentPresenter">
+<head>
+    <title>Codziennik nieprojektowy</title>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <script src="/javascripts/angular/angular.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/1.0.21/firebase.js"></script>
+    <script src="/javascripts/angular/angularfire.min.js"></script>
+    <script src="/javascripts/jquery-2.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="/javascripts/angular/ui-bootstrap-tpls-0.11.2.min.js"></script>
+    <script src="/javascripts/angular/app.js"></script>
+
+</head>
+<div ng-controller="contentController">
+    <div style="height: 800px">
+        <carousel interval="20000">
+            <slide ng-repeat="slide in slides" active="slide.active">
+                <img ng-src="{{image}}" style="margin:auto; height:800px;">
+                <div class="carousel-caption" style="top:0;">
+                    <h4 style="font-size: 50px;">{{slide.what}}</h4>
+                    <p style="font-size: 25px; margin-top: 50px">{{slide.description}}</p>
+                    <p style="font-size: 20px;"><a href="{{slide.link}}" target="_blank">click me</a></p>
+                    <p style="font-size: 15px; text-align: right;">{{slide.who}} {{slide.date}}</p>
+                </div>
+            </slide>
+        </carousel>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <button type="button" class="btn btn-info" ng-click="addSlide()">Share</button>
+        </div>
+    </div>
+    <script type="text/ng-template" id="modal.html">
+        <div class="modal-header">
+            <h3 class="modal-title" style="text-align: center">Share your finding!</h3>
+        </div>
+        <div class="modal-body">
+            <form role="form" method="post" name="addLink">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter name" required="true" data-ng-model="who">
+                </div>
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" placeholder="Enter title" required="true" data-ng-model="what">
+                </div>
+                <div class="form-group">
+                    <label for="link">Link</label>
+                    <input type="text" class="form-control" id="link" placeholder="Enter link" required="true" data-ng-model="link">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea type="" class="form-control" id="description" placeholder="Enter description" required="true" data-ng-model="description"></textarea>
+                </div>
+                <button data-ng-click="submit(addLink)" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+    </script>
+</div>
+
+</body>
+</html>
