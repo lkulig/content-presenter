@@ -6,8 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var contents = require('./routes/contents');
+var users = require('./routes/users');
 var app = express();
-
 
 var firebaseDB = require('./public/javascripts/FireBaseDBClient');
 
@@ -30,21 +30,9 @@ app.use(function(req,res,next){
     next();
 });
 
-var links = [];
-firebaseDB.contentsDB().limit(10).on('value', function (snapshot) {
-    if (snapshot.val()) {
-        links = snapshot.val();
-    }
-});
-
-app.use(function(req,res,next){
-    req.contents = links;
-    next();
-});
-
-
 app.use('/', routes);
 app.use('/contents', contents);
+app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

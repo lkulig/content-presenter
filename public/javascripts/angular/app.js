@@ -4,18 +4,25 @@ angular.module('contentPresenter', ['firebase', 'ui.bootstrap'])
             var firebaseUrl = new Firebase("https://luminous-fire-1463.firebaseio.com/contents");
             var fireBaseContentDB = $firebase(firebaseUrl);
             $scope.image = '/images/pobrane.jpg';
-            var slides = $scope.slides = fireBaseContentDB.$asArray();
+            $scope.slides = fireBaseContentDB.$asArray();
+            $scope.interval = "10000";
 
             $scope.addSlide = function (size) {
-
-                var modalInstance = $modal.open({
+                $modal.open({
                     templateUrl: 'modal.html',
                     controller: 'modalController',
                     size: size
                 });
             };
         }])
-    .controller('modalController', function ($scope, $modalInstance, $http) {
+    .controller('modalController', function ($scope, $modalInstance, $http, $firebase) {
+        var firebaseUrl = new Firebase("https://luminous-fire-1463.firebaseio.com/users");
+        var fireBaseUsersDB = $firebase(firebaseUrl);
+        $scope.users = fireBaseUsersDB.$asArray();
+
+        $scope.onUserSelect = function(user){
+            $scope.who = user.name;
+        };
 
         $scope.submit = function (form) {
             $scope.submitted = true;

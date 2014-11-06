@@ -4,13 +4,19 @@ var firebaseDB = new Firebase('https://luminous-fire-1463.firebaseio.com/');
 module.exports = function() {
 
     var contents = "contents";
+    var users = "users";
 
     function contentsDB() {
         return firebaseDB.child(contents);
     }
 
+    function usersDB() {
+        return firebaseDB.child(users);
+    }
+
     return {
-        contentsDB: contentsDB
+        contentsDB: contentsDB,
+        usersDB : usersDB
     };
 
 }();

@@ -7,6 +7,7 @@ var dateFormat = 'YYYY-MM-DD';
 router.post('/', function (req, res) {
     var db = req.db;
     var content = req.body;
+    content.timestamp = momentJS().unix();
     content.date = momentJS().format(dateFormat);
 
     db.contentsDB().push(content, function (error) {
