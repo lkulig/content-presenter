@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
     'use strict';
 
     grunt.loadNpmTasks('grunt-contrib-concat');
@@ -15,6 +15,8 @@ module.exports = function(grunt) {
         jsDistDir: 'dist/javascripts',
         cssDir: 'public/stylesheets',
         cssDistDir: 'dist/stylesheets',
+        imgDir: 'public/images',
+        imgDistDir: 'dist/images',
         pkg: grunt.file.readJSON('package.json'),
 
         vendor: {
@@ -43,8 +45,9 @@ module.exports = function(grunt) {
         copy: {
             main: {
                 files: [
-                    {expand: true, src: ['<%= jsDir %>/app/*'], dest: '<%= jsDistDir %>', filter: 'isFile', flatten: true},
-                    {expand: true, src: ['<%= cssDir %>/*'], dest: '<%= cssDistDir %>', filter: 'isFile', flatten: true}
+                    {expand: true, src: ['<%= jsDir %>/app/**'], dest: '<%= jsDistDir %>', filter: 'isFile', flatten: true},
+                    {expand: true, src: ['<%= cssDir %>/*'], dest: '<%= cssDistDir %>', filter: 'isFile', flatten: true},
+                    {expand: true, src: ['<%= imgDir %>/*'], dest: '<%= imgDistDir %>', filter: 'isFile', flatten: true}
                 ]
             }
         }
