@@ -5,19 +5,8 @@ RUN     rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-
 # Install Node.js and npm
 RUN     yum install -y npm
 # Bundle app source
-COPY . /bin
-# Bundle app source
-COPY . /public
-# Bundle app source
-COPY . /routes
-# Bundle app source
-COPY . /views
-# Bundle app source
-COPY . /app.js
-# Bundle app source
-COPY . /package.jsson
-
+COPY . /src
 # Install app dependencies
-RUN npm install
+RUN cd /src; npm install
 EXPOSE  3000
-CMD ["node", "/bin/www.js"]
+CMD ["node", "src/bin/www.js"]
