@@ -9,12 +9,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-html2js');
     grunt.loadNpmTasks('grunt-exec');
 
-    grunt.registerTask('default', ['exec:bower', 'concat:libs', 'copy'
-//        'concat',
-//        'uglify',
-//        'cssmin',
-//        'watch'
-    ]);
+    grunt.registerTask('default', ['exec:bower', 'concat:libs', 'copy']);
 
     grunt.initConfig({
         jsDir: 'public/javascripts/',
@@ -49,28 +44,10 @@ module.exports = function(grunt) {
         copy: {
             main: {
                 files: [
-                    // includes files within path
                     {expand: true, src: ['<%= jsDir %>/app/*'], dest: '<%= jsDistDir %>', filter: 'isFile', flatten: true},
                     {expand: true, src: ['<%= cssDir %>/*'], dest: '<%= cssDistDir %>', filter: 'isFile', flatten: true}
                 ]
             }
         }
-
-//        cssmin: {
-//            add_banner: {
-//                options: {
-//                    banner: '/*! <%= pkg.name %> <%=grunt.template.today("dd-mm-yyyy") %> */\n'
-//                },
-//                files: {
-//                    '<%=cssDistDir%><%= pkg.name %>.min.css': ['<%= concat.css.dest %>']
-//                }
-//            }
-//        },
-//        watch: {
-//            files: ['<%=jsDir%>*.js', '<%=cssDir%>*.css'],
-//            tasks: ['concat', 'uglify', 'cssmin']
-//        }
     });
-
-
 };
