@@ -9,7 +9,7 @@ var contents = require('./routes/contents');
 var users = require('./routes/users');
 var app = express();
 
-var firebaseDB = require('./public/javascripts/FireBaseDBClient');
+var firebaseDB = require('./public/javascripts/app/FireBaseDBClient');
 
 app.disable('etag');
 // view engine setup
@@ -22,7 +22,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/dist')));
 
 // use db in req
 app.use(function(req,res,next){
