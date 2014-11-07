@@ -6,7 +6,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-html2js');
     grunt.loadNpmTasks('grunt-exec');
 
     grunt.registerTask('default', ['exec:bower', 'concat:libs', 'copy']);
