@@ -5,7 +5,7 @@ angular.module('contentPresenter')
         $scope.users = fireBaseUsersDB.$asArray();
 
         $scope.onUserSelect = function (user) {
-            $scope.who = user.name;
+            $scope.person = user.name;
         };
 
         $scope.submit = function (form) {
@@ -14,9 +14,8 @@ angular.module('contentPresenter')
                 return;
             }
             var params = {
-                'who': $scope.who,
-                'what': $scope.what,
-                'link': $scope.link,
+                'person': $scope.person,
+                'title': $scope.title,
                 'description': $scope.description
             };
 
@@ -29,6 +28,16 @@ angular.module('contentPresenter')
             });
 
             $modalInstance.close();
+        };
+
+        $scope.tinymceOptions = {
+            theme: 'modern',
+            plugins: [
+                'paste, table, image, link, code, textcolor, preview'
+            ],
+            toolbar1: 'bold, italic, underline, strikethrough, bullist, numlist, ' +
+                '|, table, delete_table, delete_row, delete_col, row_before, row_after, col_before, col_after, ' +
+                'split_cells, merge_cells, |, link, unlink'
         };
 
     });

@@ -1,0 +1,1 @@
+angular.module('contentPresenter', ['firebase', 'ui.bootstrap', 'ui.tinymce']);
