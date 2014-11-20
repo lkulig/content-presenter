@@ -1,3 +1,3 @@
-worker: npm install
-worker: grunt production
+web: npm install
+web: grunt production
 web: node app.js
