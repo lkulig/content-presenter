@@ -1,1 +1,0 @@
-angular.module('contentPresenter', ['firebase', 'ui.bootstrap']);
